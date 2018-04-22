@@ -1,0 +1,19 @@
+.appBar {
+  background-color: white;
+  border-bottom: 1px #E0E0E0 solid;
+  position: relative;
+  padding-right: 0;
+  padding-left: 0;
+  height: 4rem;
+  transition: height 0.4s;
+
+  &.-hide {
+    overflow: hidden;
+    border-bottom: 0;
+    height: 0;
+  }
+
+  &.-tall {
+    height: 16rem;
+  }
+}
