@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Snackbar } from 'react-toolbox';
+import { Snackbar } from 'react-toolbox/lib/snackbar';
 
 import './toast.scss';
 
