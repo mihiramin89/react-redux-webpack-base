@@ -10,12 +10,13 @@ import App from 'containers/app';
 
 import configureStore from './redux/configureStore';
 
-const router = createRouter(routes, { defaultRoute: LOGIN })
-  .usePlugin(browserPlugin());
+const router = createRouter(routes, { defaultRoute: LOGIN }).usePlugin(
+  browserPlugin()
+);
 
 const store = configureStore(router);
 
-const render = (Component) => {
+const render = Component => {
   router.start(() => {
     ReactDOM.render(Component(store, router), document.getElementById('root'));
   });

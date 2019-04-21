@@ -11,9 +11,9 @@ const TooltipIcon = Tooltip(props => <span {...omit('theme', props)} />);
 const icons = {};
 const svgData = require.context('./svg', false, /\.svg$/);
 
-svgData.keys().forEach((filename) => {
+svgData.keys().forEach(filename => {
   const key = filename.replace(/(\.\/|\.svg)/g, '');
-  icons[key] = [filename].map(svgData)[0];
+  icons[key] = [filename].map(svgData)[0]; // eslint-disable-line
 
   return true;
 });
@@ -36,12 +36,10 @@ export default class Icon extends React.Component {
   };
 
   render() {
-    const classNames = [
-      '-icon',
-      this.props.size,
-      this.props.className,
-    ];
-    const iconHtml = icons[this.props.icon] ? icons[this.props.icon] : icons[this.props.default];
+    const classNames = ['-icon', this.props.size, this.props.className];
+    const iconHtml = icons[this.props.icon]
+      ? icons[this.props.icon]
+      : icons[this.props.default];
 
     if (this.props.tooltip) {
       return (

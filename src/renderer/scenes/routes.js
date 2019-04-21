@@ -1,7 +1,4 @@
-import {
-  LOGIN,
-  SEDOKU,
-} from 'redux-modules/router/constants';
+import { LOGIN, SEDOKU } from 'redux-modules/router/constants';
 
 export default [
   { name: LOGIN, path: '/', icon: 'home' },

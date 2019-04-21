@@ -21,7 +21,12 @@ const emptyObject = always({});
 const getPropOrEmptyObjectFunction = propOr(emptyObject);
 const secondArgument = nthArg(1);
 
-const typeIs = typeName => compose(equals(typeName), type, nthArg(0));
+const typeIs = typeName =>
+  compose(
+    equals(typeName),
+    type,
+    nthArg(0)
+  );
 const applyHandlerByType = cond([
   [typeIs('Object'), merge],
   [T, secondArgument],
@@ -31,12 +36,14 @@ export function createReducer(defaultState, ...actionMaps) {
 
   return (state = defaultState, action) => {
     const actionType = getPropOrEmptyString('type', action);
-    const actionTypeHandler = getPropOrEmptyObjectFunction(actionType, actionMap);
+    const actionTypeHandler = getPropOrEmptyObjectFunction(
+      actionType,
+      actionMap
+    );
 
     return applyHandlerByType(state, actionTypeHandler(state, action));
   };
 }
-
 
 export function reduceReducers(...reducers) {
   return (previous, current) =>
@@ -55,7 +62,4 @@ const delegateReducer = (slice, reducer) => (state, action) => {
   return state;
 };
 
-export default reduceReducers(
-  app,
-  delegateReducer('router', router5Reducer),
-);
+export default reduceReducers(app, delegateReducer('router', router5Reducer));

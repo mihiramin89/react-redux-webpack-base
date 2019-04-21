@@ -1,10 +1,4 @@
-import {
-  contains,
-  equals,
-  findIndex,
-  insert,
-  remove,
-} from 'ramda';
+import { contains, equals, findIndex, insert, remove } from 'ramda';
 import { setstate, select } from 'redux-modules/general';
 import { openDrawers } from 'redux-modules/layout/drawer/paths';
 import { routeName } from 'redux-modules/router/paths';

@@ -10,5 +10,5 @@ const actions = {
 
 export default connect(
   null,
-  actions,
+  actions
 )(AppDrawer);

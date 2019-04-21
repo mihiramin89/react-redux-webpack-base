@@ -11,9 +11,7 @@ import {
   testIfExists,
 } from 'how-the-test-was-won';
 
-import {
-  map,
-} from 'ramda';
+import { map } from 'ramda';
 
 import {
   actionTypeIncludes,
@@ -66,7 +64,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
             data: false,
           },
         },
-        expected.parent,
+        expected.parent
       );
 
       testIfExists(result);
@@ -84,7 +82,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
         {
           type: 'actionType',
         },
-        'actionType',
+        'actionType'
       );
 
       testIfExists(result);
@@ -97,7 +95,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
         {
           type: 'actionType',
         },
-        'aDifferentStringToTestWith',
+        'aDifferentStringToTestWith'
       );
 
       shouldNotBeNull(result);
@@ -111,7 +109,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
         {
           objectHasNo: 'aString',
         },
-        'actionTye',
+        'actionTye'
       );
 
       shouldNotBeNull(result);
@@ -150,7 +148,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
           meta: {
             path: ['a', 'path'],
           },
-        },
+        }
       );
 
       it('should set the values in the passed state', () => {
@@ -177,7 +175,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
             data: true,
           },
           meta: ['a', 'path'],
-        },
+        }
       );
 
       it('should set the values in the passed state', () => {
@@ -190,7 +188,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
     describe('should return an object of action handlers', () => {
       testIfExists(generalActionsMap);
       shouldBeAnObject(generalActionsMap);
-      map((x) => {
+      map(x => {
         shouldBeAFunction(x);
       }, generalActionsMap);
     });
@@ -226,7 +224,7 @@ describe('Users Redux Module (redux-modules/general/index.js)', () => {
             data: false,
           },
         },
-        expected.parent,
+        expected.parent
       );
 
       testIfExists(result);

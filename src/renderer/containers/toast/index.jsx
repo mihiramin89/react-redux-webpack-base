@@ -15,5 +15,5 @@ const actions = {
 
 export default connect(
   mapStateToProps,
-  actions,
+  actions
 )(Toast);

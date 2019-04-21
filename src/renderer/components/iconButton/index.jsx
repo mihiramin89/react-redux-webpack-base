@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty, omit } from 'ramda';
 
-import {
-  IconButton,
-  Tooltip,
-} from 'react-toolbox/lib';
+import { IconButton, Tooltip } from 'react-toolbox/lib';
 
 import { concatClasses } from 'redux-modules/general/utils';
 
@@ -37,13 +34,8 @@ export default class CustomIconButton extends React.Component {
   }
 
   setClassNames = (className, color, size) => {
-    this.classNames = [
-      '-icon-button',
-      className,
-      color,
-      size,
-    ];
-  }
+    this.classNames = ['-icon-button', className, color, size];
+  };
 
   render() {
     if (isEmpty(this.props.tooltip)) {
@@ -57,6 +49,11 @@ export default class CustomIconButton extends React.Component {
     }
 
     const TooltipIconButton = Tooltip(IconButton);
-    return (<TooltipIconButton {...this.props} className={concatClasses(this.classNames)} />);
+    return (
+      <TooltipIconButton
+        {...this.props}
+        className={concatClasses(this.classNames)}
+      />
+    );
   }
 }

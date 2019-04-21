@@ -1,7 +1,5 @@
 {
-  "exclude": [
-    ".git/ omponents/**"
-  ],
+  "exclude": [".git/ omponents/**"],
   "remove-empty-rulesets": true,
   "always-semicolon": true,
   "color-case": "lower",
@@ -26,15 +24,9 @@
   "unitless-zero": true,
   "vendor-prefix-align": true,
   "sort-order": [
-    [
-      "$variable"
-    ],
-    [
-      "$extend"
-    ],
-    [
-      "$include"
-    ],
+    ["$variable"],
+    ["$extend"],
+    ["$include"],
     [
       "align-content",
       "align-items",
@@ -219,8 +211,6 @@
       "z-index",
       "zoom"
     ],
-    [
-      "$include breakpoint"
-    ]
+    ["$include breakpoint"]
   ]
 }

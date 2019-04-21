@@ -7,13 +7,8 @@ export default class SedokuClass extends React.Component {
     return (
       <Flexbox justifyContent="center" width="100%">
         <Card className="sedoku-card">
-          <CardTitle
-            title="Sedoku"
-            subtitle="subtext!"
-          />
-          <CardText className="description">
-            Sedouku work here
-          </CardText>
+          <CardTitle title="Sedoku" subtitle="subtext!" />
+          <CardText className="description">Sedouku work here</CardText>
         </Card>
       </Flexbox>
     );

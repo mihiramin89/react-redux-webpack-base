@@ -2,10 +2,7 @@ import { connect } from 'react-redux';
 
 import { select } from 'redux-modules/general';
 
-import {
-  loadingType,
-  showLoading,
-} from 'redux-modules/layout/loading/paths';
+import { loadingType, showLoading } from 'redux-modules/layout/loading/paths';
 import { openDrawers, sidesByRoute } from 'redux-modules/layout/drawer/paths';
 import { route } from 'redux-modules/router/paths';
 
@@ -21,4 +18,7 @@ const mapStateToProps = state => ({
 
 const actions = {};
 
-export default connect(mapStateToProps, actions)(Layout);
+export default connect(
+  mapStateToProps,
+  actions
+)(Layout);

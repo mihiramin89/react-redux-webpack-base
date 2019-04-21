@@ -2,10 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 
 const Dotenv = require('dotenv-webpack');
-const FileManagerPlugin = require('filemanager-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || 'localhost';
 const PROTOCOL = process.env.HTTPS === 'true' ? 'https' : 'http';
 
@@ -29,14 +29,6 @@ module.exports = ({ prod } = {}) => {
     'postcss-loader',
   ];
 
-  // const proxy = {
-  //   '/manager/api': {
-  //     changeOrigin: true,
-  //     secure: true,
-  //     target: 'https://google.com',
-  //   },
-  // };
-
   return {
     bail: prod,
     devServer: {
@@ -46,49 +38,35 @@ module.exports = ({ prod } = {}) => {
       hot: true,
       https: PROTOCOL === 'https',
       port: DEFAULT_PORT,
-      // proxy,
       publicPath: '/',
     },
-    entry: prod ? [
-      './src/renderer/index',
-    ] : [
-      'react-hot-loader/patch',
-      './src/renderer/index',
-    ],
+    entry: prod
+      ? ['./src/renderer/index']
+      : ['react-hot-loader/patch', './src/renderer/index'],
     mode: prod ? 'production' : 'development',
     module: {
       rules: [
         {
-          enforce: 'pre',
-          test: /\.jsx|js($|\?)/,
-          use: 'eslint-loader',
-          include: [
-            path.resolve(__dirname, 'src'),
-          ],
-        },
-        {
           test: /\.jsx|js($|\?)/,
           use: 'babel-loader',
-          exclude: [
-            path.resolve(__dirname, 'node_modules'),
-          ],
+          exclude: [path.resolve(__dirname, 'node_modules')],
         },
         {
           test: /\.scss$/,
-          use: [{
-            loader: 'style-loader',
-          }, {
-            loader: 'css-loader',
-          }, {
-            loader: 'sass-loader',
-          }],
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader',
+            },
+            {
+              loader: 'sass-loader',
+            },
+          ],
         },
         {
           test: /\.css($|\?)/,
-          // use: extractCSS.extract({
-          //   fallback: 'style-loader',
-          //   use: cssLoaders,
-          // }),
           use: ['style-loader', ...cssLoaders],
         },
         {
@@ -126,27 +104,30 @@ module.exports = ({ prod } = {}) => {
       publicPath: '/',
     },
     plugins: [
-      ...(prod ? [
-        new FileManagerPlugin({
-          onEnd: {
-            copy: [
-              { source: path.resolve(__dirname, 'public', '*'), destination: path.resolve(__dirname, 'dist') },
-            ],
-          },
-        }),
-      ] : [
-        new webpack.HotModuleReplacementPlugin(),
-      ]),
-      // extractCSS,
+      ...(prod
+        ? [
+            new CopyPlugin([
+              {
+                from: path.resolve(__dirname, 'public', '*'),
+                to: path.resolve(__dirname, 'dist'),
+              },
+            ]),
+          ]
+        : [new webpack.HotModuleReplacementPlugin()]),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         },
       }),
-      new HtmlWebpackPlugin({ fileName: 'index.html', template: './src/renderer/index.html' }),
+      new HtmlWebpackPlugin({
+        fileName: 'index.html',
+        template: './src/renderer/index.html',
+      }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new Dotenv({
-        path: prod ? path.resolve(__dirname, '.env.production') : path.resolve(__dirname, '.env.development'),
+        path: prod
+          ? path.resolve(__dirname, '.env.production')
+          : path.resolve(__dirname, '.env.development'),
       }),
     ],
     resolve: {
@@ -154,8 +135,20 @@ module.exports = ({ prod } = {}) => {
       alias: {
         components: path.resolve(__dirname, 'src', 'renderer', 'components'),
         containers: path.resolve(__dirname, 'src', 'renderer', 'containers'),
-        'redux-middleware': path.resolve(__dirname, 'src', 'renderer', 'redux', 'middleware'),
-        'redux-modules': path.resolve(__dirname, 'src', 'renderer', 'redux', 'modules'),
+        'redux-middleware': path.resolve(
+          __dirname,
+          'src',
+          'renderer',
+          'redux',
+          'middleware'
+        ),
+        'redux-modules': path.resolve(
+          __dirname,
+          'src',
+          'renderer',
+          'redux',
+          'modules'
+        ),
         root: __dirname,
         scenes: path.resolve(__dirname, 'src', 'renderer', 'scenes'),
         src: path.resolve(__dirname, 'src'),

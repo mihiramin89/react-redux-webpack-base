@@ -21,7 +21,11 @@ export default class CustomButton extends React.Component {
   };
 
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]),
+    children: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     className: PropTypes.string,
     color: PropTypes.string,
     disabled: PropTypes.bool,
@@ -37,33 +41,44 @@ export default class CustomButton extends React.Component {
     this._updateclassVars(nextProps);
   }
 
-  _updateclassVars = (props) => {
+  _updateclassVars = props => {
     this.classNames = [
       props.className || '',
       !props.className ? props.color : '',
       !props.className ? 'button' : '',
     ];
 
-    this.filteredProps = omit(['tooltip', 'tooltipPosition', 'disabled'], props);
-  }
+    this.filteredProps = omit(
+      ['tooltip', 'tooltipPosition', 'disabled'],
+      props
+    );
+  };
 
   render() {
     if (this.props.tooltip) {
       return (
         <TooltipButton
           {...omit(['disabled'], this.props)}
-          className={concatClasses([...this.classNames, this.props.selected ? '-selected' : ''])}
-          disabled={this.props.disabled}
-        >{this.props.children}</TooltipButton>
+          className={concatClasses([
+            ...this.classNames,
+            this.props.selected ? '-selected' : '',
+          ])}
+          disabled={this.props.disabled}>
+          {this.props.children}
+        </TooltipButton>
       );
     }
 
     return (
       <Button
         {...this.filteredProps}
-        className={concatClasses([...this.classNames, this.props.selected ? '-selected' : ''])}
-        disabled={this.props.disabled}
-      >{this.props.children}</Button>
+        className={concatClasses([
+          ...this.classNames,
+          this.props.selected ? '-selected' : '',
+        ])}
+        disabled={this.props.disabled}>
+        {this.props.children}
+      </Button>
     );
   }
 }

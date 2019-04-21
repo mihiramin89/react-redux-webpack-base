@@ -10,10 +10,7 @@ import {
   shouldNotBeEmpty,
 } from 'how-the-test-was-won';
 
-import {
-  resetToast,
-  showToast,
-} from 'redux-modules/layout/toast/thunks';
+import { resetToast, showToast } from 'redux-modules/layout/toast/thunks';
 
 import { clone } from 'ramda';
 
@@ -22,21 +19,25 @@ const mockStore = configureMockStore(middlewares);
 
 describe('Layout/Toast Module - Thunks (redux-modules/layout/toast/thunks.js)', () => {
   describe('showToast()', () => {
-    const initialState = { layout: {
-      toast: { show: false },
-    } };
+    const initialState = {
+      layout: {
+        toast: { show: false },
+      },
+    };
 
     it('should dispatch Redux state needed to show the toast', () => {
       const store = mockStore(clone(initialState));
       const callback = () => 42;
-      store.dispatch(showToast('Toast content.', {
-        buttonText: 'Button Text.',
-        buttonType: 'buttonType',
-        callback,
-        timeout: 1000,
-      }));
+      store.dispatch(
+        showToast('Toast content.', {
+          buttonText: 'Button Text.',
+          buttonType: 'buttonType',
+          callback,
+          timeout: 1000,
+        })
+      );
       const actions = store.getActions();
-      const payload = actions[0].payload;
+      const { payload } = actions[0];
       shouldNotBeEmpty(payload);
       shouldBeAnObject(payload);
       shouldBeTrue(payload.show);
@@ -50,15 +51,17 @@ describe('Layout/Toast Module - Thunks (redux-modules/layout/toast/thunks.js)', 
   });
 
   describe('resetToast()', () => {
-    const initialState = { layout: {
-      toast: { show: true },
-    } };
+    const initialState = {
+      layout: {
+        toast: { show: true },
+      },
+    };
 
     it('should dispatch Redux state needed to reset the toast', () => {
       const store = mockStore(clone(initialState));
       store.dispatch(resetToast());
       const actions = store.getActions();
-      const payload = actions[0].payload;
+      const { payload } = actions[0];
       shouldBeFalse(payload);
     });
   });

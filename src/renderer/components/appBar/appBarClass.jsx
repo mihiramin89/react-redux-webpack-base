@@ -11,7 +11,11 @@ export default class CustomAppBar extends React.Component {
   };
 
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
+    children: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+      PropTypes.string,
+    ]),
     showAppBar: PropTypes.bool.isRequired,
     tall: PropTypes.bool,
   };
@@ -24,10 +28,9 @@ export default class CustomAppBar extends React.Component {
     ];
 
     return (
-      <AppBar
-        className={concatClasses(classNames)}
-        flat
-      >{this.props.children}</AppBar>
+      <AppBar className={concatClasses(classNames)} flat>
+        {this.props.children}
+      </AppBar>
     );
   }
 }

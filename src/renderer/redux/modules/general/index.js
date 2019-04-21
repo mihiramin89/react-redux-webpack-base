@@ -9,14 +9,28 @@ import {
   view,
 } from 'ramda';
 
-export const getLens = ifElse(Array.isArray, lensPath, compose(lensPath, of));
-export const createSetter = compose(set, getLens);
-export const createHandler = key =>
-  (state, { payload }) => createSetter(key)(payload, state);
+export const getLens = ifElse(
+  Array.isArray,
+  lensPath,
+  compose(
+    lensPath,
+    of
+  )
+);
+export const createSetter = compose(
+  set,
+  getLens
+);
+export const createHandler = key => (state, { payload }) =>
+  createSetter(key)(payload, state);
 
-export const createSelector = compose(view, getLens);
+export const createSelector = compose(
+  view,
+  getLens
+);
 export const select = (path, state) => createSelector(path)(state);
-export const setPath = (path, state, payload) => createHandler(path)(state, { payload });
+export const setPath = (path, state, payload) =>
+  createHandler(path)(state, { payload });
 
 export const actionTypeIncludes = (action, str) => {
   const type = select('type', action);
@@ -24,20 +38,20 @@ export const actionTypeIncludes = (action, str) => {
 };
 const orEmptyObject = defaultTo({});
 
-export const returnActionResult = (actionType, payload = {}, meta = {}, debug = '') => ({
+export const returnActionResult = (
+  actionType,
+  payload = {},
+  meta = {},
+  debug = ''
+) => ({
   type: actionType,
   payload: orEmptyObject(payload),
   meta: orEmptyObject(meta),
   ...(!isEmpty(debug) ? { debug } : {}),
 });
 
-export const createAction = actionType =>
-  (payload, meta, debug) => returnActionResult(
-    actionType,
-    payload,
-    meta,
-    debug,
-  );
+export const createAction = actionType => (payload, meta, debug) =>
+  returnActionResult(actionType, payload, meta, debug);
 
 /*
  * -----------------------------------------------------------------------------

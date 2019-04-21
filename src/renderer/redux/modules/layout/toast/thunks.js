@@ -1,31 +1,24 @@
 import { setstate } from 'redux-modules/general';
-import {
-  show,
-  toast,
-} from './paths';
+import { show, toast } from './paths';
 
-export function showToast(
-  content = null,
-  options = {},
-) {
-  const {
-    buttonText,
-    buttonType,
-    callback,
-    timeout,
-    type,
-  } = options;
+export function showToast(content = null, options = {}) {
+  const { buttonText, buttonType, callback, timeout, type } = options;
 
-  return (dispatch) => {
-    dispatch(setstate({
-      buttonText,
-      buttonType,
-      content,
-      show: true,
-      timeout: timeout || 2000,
-      type,
-      undoData: { callback },
-    }, toast));
+  return dispatch => {
+    dispatch(
+      setstate(
+        {
+          buttonText,
+          buttonType,
+          content,
+          show: true,
+          timeout: timeout || 2000,
+          type,
+          undoData: { callback },
+        },
+        toast
+      )
+    );
   };
 }
 

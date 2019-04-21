@@ -15,24 +15,25 @@ import {
 
 export const concatClasses = compose(
   join(' '),
-  reject(isEmpty),
+  reject(isEmpty)
 );
 
-export const filterWithKeys = (pred, obj) => pipe(
-  toPairs,
-  filter(apply(pred)),
-  fromPairs,
-)(obj);
+export const filterWithKeys = (pred, obj) =>
+  pipe(
+    toPairs,
+    filter(apply(pred)),
+    fromPairs
+  )(obj);
 
 export const hasValue = val => !(isEmpty(val) || isNil(val));
 
 export const mapIndexed = addIndex(map);
 
-export const normalizeApiUrl = (url) => {
+export const normalizeApiUrl = url => {
   const win = typeof window === 'undefined' ? global.window : window;
-  return url && url.startsWith('/') ? `${win.location.origin}${
-    process.env.REACT_APP_API_BASE_PATH
-  }${url}` : url;
+  return url && url.startsWith('/')
+    ? `${win.location.origin}${process.env.REACT_APP_API_BASE_PATH}${url}`
+    : url;
 };
 
 export default {

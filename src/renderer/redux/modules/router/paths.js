@@ -11,7 +11,6 @@ export const previousRouteParams = [...previousRoute, 'params'];
 export const lastMainRoute = [...router, 'lastMainRoute'];
 export const lastMainRouteName = [...router, 'lastMainRoute', 'name'];
 
-
 export default {
   lastMainRoute,
   lastMainRouteName,

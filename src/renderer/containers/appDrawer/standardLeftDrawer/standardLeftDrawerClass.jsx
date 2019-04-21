@@ -13,7 +13,7 @@ export default class StandardLeftDrawer extends React.Component {
     routeName: PropTypes.string.isRequired,
   };
 
-  _createNavButton = (route) => {
+  _createNavButton = route => {
     if (route.icon) {
       this.navButtons.push(
         <Button
@@ -23,18 +23,14 @@ export default class StandardLeftDrawer extends React.Component {
           label={route.name}
           onClick={() => this.props.goTo(route.name)}
           selected={equals(route.name, this.props.routeName)}
-        />,
+        />
       );
     }
-  }
+  };
 
   render() {
     this.navButtons = [];
     routes.forEach(route => this._createNavButton(route));
-    return (
-      <Flexbox flexDirection="column">
-        { this.navButtons }
-      </Flexbox>
-    );
+    return <Flexbox flexDirection="column">{this.navButtons}</Flexbox>;
   }
 }

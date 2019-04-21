@@ -24,19 +24,15 @@ export default class CustomChip extends React.Component {
         className="empty"
         flexDirection="column"
         justifyContent="center"
-        width="100%"
-      >
+        width="100%">
         <Flexbox
           alignItems="center"
           className="empty-icon"
           flexDirection="column"
-          justifyContent="center"
-        >
+          justifyContent="center">
           <Icon icon={this.props.icon} size="xlg" />
         </Flexbox>
-        <div className="empty-description">
-          {this.props.children}
-        </div>
+        <div className="empty-description">{this.props.children}</div>
       </Flexbox>
     );
   }

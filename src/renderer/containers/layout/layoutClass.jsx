@@ -27,7 +27,7 @@ import './layout.scss';
 class Layout extends React.Component {
   static defaultProps = {
     route: { name: LOGIN, params: {} },
-  }
+  };
 
   static propTypes = {
     loadingType: PropTypes.string.isRequired,
@@ -39,10 +39,7 @@ class Layout extends React.Component {
 
   constructor(props) {
     super(props);
-    const {
-      type,
-      parent,
-    } = props.route.params;
+    const { type, parent } = props.route.params;
     const routeName = props.route.name;
 
     this.mainRoute = type === SHEET ? parent : routeName;
@@ -50,7 +47,7 @@ class Layout extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    const route = nextProps.route;
+    const { route } = nextProps;
     console.log(nextProps);
     const isBottomSheet = route.params.type === SHEET;
 
@@ -64,7 +61,10 @@ class Layout extends React.Component {
 
     const viewClassNames = [
       'main-container',
-      equals(this.props.loadingType, DISABLE_INNER_MAIN) && this.props.showLoading ? '-disable' : '',
+      equals(this.props.loadingType, DISABLE_INNER_MAIN) &&
+      this.props.showLoading
+        ? '-disable'
+        : '',
       routeOpenDrawers.length === 2 ? '-two-drawers-open' : '',
       routeOpenDrawers.length === 1 ? '-one-drawer-open' : '',
       routeDrawers.length === 2 ? '-two-drawers' : '',
@@ -73,26 +73,14 @@ class Layout extends React.Component {
     return (
       <Flexbox width="100%" className={bottomSheet ? '-bottom-sheet' : ''}>
         <ErrorBoundary componentName="Left Drawer">
-          <AppDrawer
-            openDrawers={routeOpenDrawers}
-            route={route}
-            side={LEFT}
-          />
+          <AppDrawer openDrawers={routeOpenDrawers} route={route} side={LEFT} />
         </ErrorBoundary>
-        <Flexbox
-          className="app-content"
-          flexDirection="column"
-          flexGrow={1}
-        >
+        <Flexbox className="app-content" flexDirection="column" flexGrow={1}>
           <Flexbox
             className={concatClasses(viewClassNames)}
             flexDirection="row"
-            flexGrow={1}
-          >
-            <Flexbox
-              element="main"
-              flexGrow={1}
-            >
+            flexGrow={1}>
+            <Flexbox element="main" flexGrow={1}>
               {createElement(scenes[route])}
             </Flexbox>
           </Flexbox>
@@ -111,23 +99,26 @@ class Layout extends React.Component {
   render() {
     const layoutClasses = [
       'layout',
-      equals(this.props.loadingType, DISABLE_ALL) && this.props.showLoading ? '-disable' : '',
+      equals(this.props.loadingType, DISABLE_ALL) && this.props.showLoading
+        ? '-disable'
+        : '',
     ];
 
     return (
       <Flexbox
         className={concatClasses(layoutClasses)}
         flexDirection="column"
-        height="100vh"
-      >
+        height="100vh">
         <ProgressBar
           className={concatClasses([
             this.bottomSheet ? '-bottom-sheet' : '',
-            (
-              equals(this.props.loadingType, DISABLE_INNER_MAIN) ||
-              equals(this.props.loadingType, BASIC_INNER_MAIN)
-            ) ? '-main-container-loading' : '',
-            (equals(this.props.loadingType, NO_LOAD) || !this.props.showLoading) ? '-hide-loader' : '',
+            equals(this.props.loadingType, DISABLE_INNER_MAIN) ||
+            equals(this.props.loadingType, BASIC_INNER_MAIN)
+              ? '-main-container-loading'
+              : '',
+            equals(this.props.loadingType, NO_LOAD) || !this.props.showLoading
+              ? '-hide-loader'
+              : '',
           ])}
           mode="indeterminate"
           type="linear"
@@ -135,11 +126,13 @@ class Layout extends React.Component {
         <Flexbox
           className={concatClasses([
             'layout-content',
-            equals(this.props.loadingType, DISABLE_CONTENT) && this.props.showLoading ? '-disable' : '',
+            equals(this.props.loadingType, DISABLE_CONTENT) &&
+            this.props.showLoading
+              ? '-disable'
+              : '',
           ])}
           element="section"
-          flexDirection="row"
-        >
+          flexDirection="row">
           {this._getView(this.mainRoute)}
           {this.bottomSheet && this._getView(this.bottomSheet, true)}
           <Toast />

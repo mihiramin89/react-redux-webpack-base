@@ -15,11 +15,13 @@ const reactToolboxVariables = {
   'font-weight-bold': '800',
   'font-weight-semi-bold': '600',
   'input-text-required-color': '#f50057',
-  'preferred-font': '"Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI",' +
+  'preferred-font':
+    '"Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI",' +
     'Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
   'snackbar-color-accept': '#68f5ca !important',
   'snackbar-color-warning': '#b388ff !important',
   'snackbar-color-cancel': '#f50057 !important',
+  'tooltip-background': 'rgba(0, 0, 0, 0.54)',
 };
 
 module.exports = {
@@ -27,10 +29,11 @@ module.exports = {
     'postcss-import': {
       root: __dirname,
     },
-    'postcss-cssnext': {
-      browsers: ['> 1%'],
+    'postcss-preset-env': {
+      stage: 0,
       features: {
-        customProperties: {
+        'custom-properties': {
+          preserve: false,
           variables: reactToolboxVariables,
         },
       },

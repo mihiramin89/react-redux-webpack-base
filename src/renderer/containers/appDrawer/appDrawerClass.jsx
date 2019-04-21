@@ -34,8 +34,7 @@ export default class AppDrawer extends React.Component {
           openDrawers={this.props.openDrawers}
           route={this.props.route}
           side={this.props.side}
-          updateOpenDrawers={this.props.updateOpenDrawers}
-        >
+          updateOpenDrawers={this.props.updateOpenDrawers}>
           {createElement(drawer.container)}
         </Drawer>
       );

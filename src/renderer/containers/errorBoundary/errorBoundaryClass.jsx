@@ -9,10 +9,14 @@ import './errorBoundary.scss';
 export default class ErrorBoundary extends React.Component {
   static defaultProps = {
     children: '',
-  }
+  };
 
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]),
+    children: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+      PropTypes.array,
+    ]),
     componentName: PropTypes.string.isRequired,
     showToast: PropTypes.func.isRequired,
   };
@@ -31,9 +35,7 @@ export default class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       return (
         <EmptyState icon="bad_mood">
-          <div>
-            Uh oh! Something went wrong.
-          </div>
+          <div>Uh oh! Something went wrong.</div>
         </EmptyState>
       );
     }

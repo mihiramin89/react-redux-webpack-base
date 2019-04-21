@@ -8,9 +8,7 @@ import {
   shouldNotBeEmpty,
 } from 'how-the-test-was-won';
 
-import {
-  updateOpenDrawers,
-} from 'redux-modules/layout/drawer/thunks';
+import { updateOpenDrawers } from 'redux-modules/layout/drawer/thunks';
 
 import { clone } from 'ramda';
 
@@ -32,8 +30,8 @@ describe('Layout/Drawer Module - Thunks (redux-modules/layout/drawer/thunks.js)'
       store.dispatch(updateOpenDrawers(true, 'left'));
       it('should dispatch Redux state for showing a toast', () => {
         const actions = store.getActions();
-        const payload = actions[0].payload;
-        const meta = actions[0].meta;
+        const { payload } = actions[0];
+        const { meta } = actions[0];
 
         shouldNotBeEmpty(payload);
         shouldBeAnObject(payload);

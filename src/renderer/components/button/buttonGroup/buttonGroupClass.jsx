@@ -2,10 +2,7 @@ import Flexbox from 'flexbox-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {
-  IconMenu,
-  MenuItem,
-} from 'react-toolbox/lib/menu';
+import { IconMenu, MenuItem } from 'react-toolbox/lib/menu';
 import { Button } from 'react-toolbox/lib/button';
 
 import Icon from 'components/icon';
@@ -31,7 +28,7 @@ export default class MarketPanel extends React.Component {
     event.stopPropagation();
 
     return item.onClick(item.value);
-  }
+  };
 
   _renderButton = (item, i) => (
     <Button
@@ -41,7 +38,7 @@ export default class MarketPanel extends React.Component {
       onClick={e => this._onClick(e, item)}
       disabled={this.props.buttonsDisabled}
     />
-  )
+  );
 
   _renderMenuItem = (item, i) => (
     <MenuItem
@@ -51,7 +48,7 @@ export default class MarketPanel extends React.Component {
       onClick={e => this._onClick(e, item)}
       disabled={this.props.buttonsDisabled}
     />
-  )
+  );
 
   render() {
     return (
@@ -61,20 +58,17 @@ export default class MarketPanel extends React.Component {
           this.props.size,
           this.props.buttonsDisabled ? '-disabled' : '',
         ])}
-        flexDirection="row"
-      >
+        flexDirection="row">
         {this.props.actions.length > 0 &&
-          mapIndexed(this._renderButton, this.props.actions)
-        }
-        {this.props.dropdown.length > 0 &&
+          mapIndexed(this._renderButton, this.props.actions)}
+        {this.props.dropdown.length > 0 && (
           <IconMenu
             icon={<Icon icon="arrow_down" />}
             position="topRight"
-            menuRipple
-          >
+            menuRipple>
             {mapIndexed(this._renderMenuItem, this.props.dropdown)}
           </IconMenu>
-        }
+        )}
       </Flexbox>
     );
   }

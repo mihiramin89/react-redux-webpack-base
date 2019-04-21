@@ -2,7 +2,7 @@ import { setstate, select } from 'redux-modules/general';
 
 // generic method that can be used updating a timestamp at a given path
 export function stamp(path) {
-  return (dispatch) => {
+  return dispatch => {
     const timestamp = new Date();
     dispatch(setstate(timestamp, path));
   };
