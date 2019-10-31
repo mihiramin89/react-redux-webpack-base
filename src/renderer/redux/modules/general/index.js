@@ -11,8 +11,7 @@ import {
 
 export const getLens = ifElse(Array.isArray, lensPath, compose(lensPath, of));
 export const createSetter = compose(set, getLens);
-export const createHandler = key =>
-  (state, { payload }) => createSetter(key)(payload, state);
+export const createHandler = key => (state, { payload }) => createSetter(key)(payload, state);
 
 export const createSelector = compose(view, getLens);
 export const select = (path, state) => createSelector(path)(state);
@@ -31,13 +30,12 @@ export const returnActionResult = (actionType, payload = {}, meta = {}, debug = 
   ...(!isEmpty(debug) ? { debug } : {}),
 });
 
-export const createAction = actionType =>
-  (payload, meta, debug) => returnActionResult(
-    actionType,
-    payload,
-    meta,
-    debug,
-  );
+export const createAction = actionType => (payload, meta, debug) => returnActionResult(
+  actionType,
+  payload,
+  meta,
+  debug,
+);
 
 /*
  * -----------------------------------------------------------------------------

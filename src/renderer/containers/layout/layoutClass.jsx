@@ -124,8 +124,8 @@ class Layout extends React.Component {
           className={concatClasses([
             this.bottomSheet ? '-bottom-sheet' : '',
             (
-              equals(this.props.loadingType, DISABLE_INNER_MAIN) ||
-              equals(this.props.loadingType, BASIC_INNER_MAIN)
+              equals(this.props.loadingType, DISABLE_INNER_MAIN)
+              || equals(this.props.loadingType, BASIC_INNER_MAIN)
             ) ? '-main-container-loading' : '',
             (equals(this.props.loadingType, NO_LOAD) || !this.props.showLoading) ? '-hide-loader' : '',
           ])}

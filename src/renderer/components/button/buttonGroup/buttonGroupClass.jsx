@@ -63,10 +63,11 @@ export default class MarketPanel extends React.Component {
         ])}
         flexDirection="row"
       >
-        {this.props.actions.length > 0 &&
-          mapIndexed(this._renderButton, this.props.actions)
+        {this.props.actions.length > 0
+          && mapIndexed(this._renderButton, this.props.actions)
         }
-        {this.props.dropdown.length > 0 &&
+        {this.props.dropdown.length > 0
+          && (
           <IconMenu
             icon={<Icon icon="arrow_down" />}
             position="topRight"
@@ -74,6 +75,7 @@ export default class MarketPanel extends React.Component {
           >
             {mapIndexed(this._renderMenuItem, this.props.dropdown)}
           </IconMenu>
+          )
         }
       </Flexbox>
     );

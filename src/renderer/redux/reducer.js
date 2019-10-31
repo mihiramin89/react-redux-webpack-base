@@ -39,8 +39,7 @@ export function createReducer(defaultState, ...actionMaps) {
 
 
 export function reduceReducers(...reducers) {
-  return (previous, current) =>
-    reducers.reduce((p, r) => r(p, current), previous);
+  return (previous, current) => reducers.reduce((p, r) => r(p, current), previous);
 }
 
 // all maps can see our state

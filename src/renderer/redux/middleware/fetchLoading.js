@@ -5,8 +5,8 @@ import { setstate } from 'redux-modules/general';
 
 export default ({ dispatch }) => next => (action) => {
   if (
-    action.type === '@@Set' &&
-    equals(action.meta, fetchLoadingCount)
+    action.type === '@@Set'
+    && equals(action.meta, fetchLoadingCount)
   ) {
     const currentLoadingFetches = action.payload;
 

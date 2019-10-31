@@ -54,7 +54,9 @@ export default class CustomButton extends React.Component {
           {...omit(['disabled'], this.props)}
           className={concatClasses([...this.classNames, this.props.selected ? '-selected' : ''])}
           disabled={this.props.disabled}
-        >{this.props.children}</TooltipButton>
+        >
+          {this.props.children}
+        </TooltipButton>
       );
     }
 
@@ -63,7 +65,9 @@ export default class CustomButton extends React.Component {
         {...this.filteredProps}
         className={concatClasses([...this.classNames, this.props.selected ? '-selected' : ''])}
         disabled={this.props.disabled}
-      >{this.props.children}</Button>
+      >
+        {this.props.children}
+      </Button>
     );
   }
 }

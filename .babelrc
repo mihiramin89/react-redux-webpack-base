@@ -1,19 +1,11 @@
 {
   "presets": [
-    ["env", {
-      "modules": false
+    ["@babel/env", {
+      "targets": { "node": "current" },
     }],
-    "react",
-    "stage-0"
+    "@babel/preset-react",
   ],
-  "env": {
-    "test": {
-      "presets": [ "env" ],
-      "plugins": [
-        ["babel-plugin-webpack-alias", { "config": "./webpack.export.js" }],
-        ["babel-plugin-rewire-exports"],
-        ["transform-decorators-legacy"]
-      ]
-    }
-  }
+  "plugins": [
+    "@babel/plugin-proposal-class-properties"
+  ],
 }

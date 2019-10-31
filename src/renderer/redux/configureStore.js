@@ -20,9 +20,7 @@ export default function configureStore(router) {
   );
 
   if (isDev && module.hot) {
-    module.hot.accept('./reducer', () =>
-      store.replaceReducer(rootReducer),
-    );
+    module.hot.accept('./reducer', () => store.replaceReducer(rootReducer));
   }
 
   return store;

@@ -27,7 +27,9 @@ export default class CustomAppBar extends React.Component {
       <AppBar
         className={concatClasses(classNames)}
         flat
-      >{this.props.children}</AppBar>
+      >
+        {this.props.children}
+      </AppBar>
     );
   }
 }

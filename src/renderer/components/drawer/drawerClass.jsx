@@ -63,16 +63,16 @@ export default class CustomDrawer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !equals(this.state.open, nextState.open) ||
-      !equals(this.props.route, nextProps.route) ||
-      !equals(this.props.side, nextProps.side);
+    return !equals(this.state.open, nextState.open)
+      || !equals(this.props.route, nextProps.route)
+      || !equals(this.props.side, nextProps.side);
   }
 
   _toggleDrawer(dynamicName = null) {
     const status = (
-      !dynamicName ||
-      !this.contentName ||
-      equals(dynamicName, this.contentName)
+      !dynamicName
+      || !this.contentName
+      || equals(dynamicName, this.contentName)
     ) ? !this.state.open : (!equals(dynamicName, this.contentName) && !this.state.open)
         ? true : this.state.open;
 
@@ -96,7 +96,8 @@ export default class CustomDrawer extends React.Component {
 
     return (
       <Flexbox className={concatClasses(classNames)}>
-        { side === RIGHT &&
+        { side === RIGHT
+          && (
           <Flexbox
             className="toggle"
             flexDirection="column"
@@ -105,11 +106,13 @@ export default class CustomDrawer extends React.Component {
           >
             <Icon icon="arrow_left" className={this.state.open ? 'rotate_180' : ''} size="sm" />
           </Flexbox>
+          )
         }
         <Flexbox className="content" flexDirection="column" flexGrow={1}>
           {children}
         </Flexbox>
-        { side === LEFT &&
+        { side === LEFT
+          && (
           <Flexbox
             className="toggle"
             flexDirection="column"
@@ -118,6 +121,7 @@ export default class CustomDrawer extends React.Component {
           >
             <Icon icon="arrow_right" className={this.state.open ? 'rotate_180' : ''} size="sm" />
           </Flexbox>
+          )
         }
       </Flexbox>
     );
